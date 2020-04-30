@@ -4,12 +4,14 @@ import { getPokemonByName } from '../../api';
 import loadingIndicator from '../../static/img/pokeball.gif';
 import Button from '../Button';
 import PokemonCard from './PokemonCard';
+import PokemonDetails from './PokemonDetails';
 import * as SC from './PokemonListItem.sc';
 
 const PokemonListItem = ({ children, data: { name } }) => {
   const [details, setDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -50,14 +52,25 @@ const PokemonListItem = ({ children, data: { name } }) => {
   }
 
   return (
-    <SC.DivGridContainer>
-      <div>
-        <PokemonCard details={details} />
-      </div>
-      <SC.DivDetailBtn>
-        <Button>SEE DETAILS</Button>
-      </SC.DivDetailBtn>
-    </SC.DivGridContainer>
+    <>
+      <SC.DivGridContainer>
+        <div>
+          <PokemonCard details={details} />
+        </div>
+        <SC.DivDetailBtn>
+          <Button
+            outlined={showDetails}
+            onClick={() => setShowDetails(!showDetails)}
+          >
+            {showDetails ? 'CLOSE DETAILS' : 'SEE DETAILS'}
+          </Button>
+        </SC.DivDetailBtn>
+
+        {showDetails && (
+          <PokemonDetails sprites={details.sprites} moves={details.moves} />
+        )}
+      </SC.DivGridContainer>
+    </>
   );
 };
 

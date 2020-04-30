@@ -53,9 +53,7 @@ const App = ({
             useWindow={false}
           >
             {displayedPokemons.map((item, index) => (
-              <div key={index}>
-                <PokemonListItem data={item} key={index} />
-              </div>
+              <PokemonListItem data={item} key={index} />
             ))}
           </InfiniteScroll>
         </SC.DivContent>

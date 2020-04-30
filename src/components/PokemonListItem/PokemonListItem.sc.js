@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const DivGridContainer = styled.div`
   padding: 20px 40px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 500px auto;
 
-  &:nth-child(even) {
+  &:nth-child(odd) {
     background-color: #f8f7f7;
   }
 `;
